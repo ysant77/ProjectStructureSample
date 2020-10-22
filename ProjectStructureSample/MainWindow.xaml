@@ -1,0 +1,50 @@
+﻿<Window x:Class="ProjectStructureSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectStructureSample"
+        mc:Ignorable="d"
+        xmlns:controls="clr-namespace:ProjectStructureSample.Controls"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DockPanel x:Name="dock1">
+            <StackPanel DockPanel.Dock="Left" Width="200" Grid.Column="0">
+                <Button Content="Project 1" x:Name="Project1Button" Click="Button_Click" />
+                <Button Margin="0 10 0 0" x:Name="Project2Button"
+                        Content="Project 2" Click="Button_Click" />
+            </StackPanel>
+            <StackPanel Margin="10"
+                        HorizontalAlignment="Center" Width="auto"
+                        VerticalAlignment="Center" DockPanel.Dock="Right" Grid.Column="1">
+                <TextBlock x:Name="textBlock" />
+                <!-- MouseDoubleClick="dataGrid_MouseDoubleClick" -->
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox SelectedValue="{Binding SelectedProperty, Mode=TwoWay}"
+                                  ItemsSource="{Binding ComboBoxItemSource,
+                                  UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Search" Margin="5"/>
+                        <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="100" Margin="5" />
+                        <Button Content="Clear" Foreground="White"
+                                    Background="Green" Margin="5"
+                                    Command="{Binding ClearCommand}"/>
+                    </StackPanel>
+                    <StackPanel Margin="10">
+                        <DataGrid x:Name="dataGrid"
+                                  CanUserAddRows="False"  CanUserDeleteRows="False"
+                                  SelectionMode="Single"
+                                  SelectedItem="{Binding SelectedObject}">
+
+                        </DataGrid>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
